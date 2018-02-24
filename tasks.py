@@ -67,6 +67,6 @@ for cow in yields:
             BadDays += 1
             if BadDays >= DAYSOFWEEK:
                 BadCows.append(cow[0])
-print("The cow that gave the highest milk volume is cow: " + BestCow)
+print("The cow that gave the highest milk volume is cow " + BestCow)
 for cow in BadCows:
-    print("Cow " + cow + " gave less than " + str(YIELDTHRESHOLD) + " for " + str(DAYSOFWEEK) + " or more days")
+    print("Cow " + cow + " gave less than " + str(YIELDTHRESHOLD) + " litres for " + str(DAYSOFWEEK) + " or more days")
