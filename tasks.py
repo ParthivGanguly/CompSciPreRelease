@@ -1,3 +1,5 @@
+# TASK 1
+
 YIELDTHRESHOLD = 12
 DAYSOFWEEK = 4
 CowPopulation = 0
@@ -8,7 +10,7 @@ while CowPopulation == 0 or CowPopulation > 999:
 yields = []
 for i in range(CowPopulation):
     yields.append([])
-for day in range(1, 8):
+for day in range(1, 2):
     dayOver = False
     while not dayOver:
         cowID = ""
@@ -32,5 +34,19 @@ for day in range(1, 8):
                 cow.append(litres)
                 break
         if input("Is the day over ? Yes (y) or No (Any other key): ") == "y":
+            for cow in yields:
+                if len(cow) == day:
+                    cow.append(0.0)
             dayOver = True
-print(yields)
+
+# TASK 2
+
+TotalMilk = 0
+for cow in yields:
+    for milk in cow:
+        if str(milk) != milk:
+            TotalMilk += milk
+print("Average volume of milk per cow: " + round(TotalMilk / CowPopulation, 0))
+print("Total weekly volume of milk: " + TotalMilk)
+
+# TASK 3
