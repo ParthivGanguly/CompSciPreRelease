@@ -11,6 +11,7 @@ yields = []
 for i in range(CowPopulation):
     yields.append([])
 for day in range(1, 8):
+    print("Day " + str(day))
     dayOver = False
     while not dayOver:
         cowID = ""
