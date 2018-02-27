@@ -3,9 +3,9 @@
 YIELDTHRESHOLD = 12.0
 DAYSOFWEEK = 4
 CowPopulation = 0
-while CowPopulation == 0 or CowPopulation > 999:
+while CowPopulation <= 0 or CowPopulation > 999:
     CowPopulation = int(input("Enter number of cows in the herd: "))
-    if CowPopulation == 0 or CowPopulation > 999:
+    if CowPopulation <= 0 or CowPopulation > 999:
         print("Cow Population must be between 1 to 999 (inclusive)")
 yields = []
 for i in range(CowPopulation):
