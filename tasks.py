@@ -22,7 +22,7 @@ for day in range(1, 8):
                 print("Cow ID must be exactly 3 digits long")
         litres = 0.0
         while litres <= 0.0:
-            litres = float(input("Enter litres of milk: "))
+            litres = round(float(input("Enter litres of milk: ")), 1)
             if litres <= 0.0:
                 print("Enter positive number")
         for cow in yields:
@@ -56,7 +56,7 @@ for cow in yields:
         if str(milk) != milk:
             TotalMilk += milk
 print("Average volume of milk per cow: " + str(round(TotalMilk / CowPopulation, 0)))
-print("Total weekly volume of milk: " + str(TotalMilk))
+print("Total weekly volume of milk: " + str(round(TotalMilk, 0)))
 
 # TASK 3
 
@@ -76,6 +76,6 @@ for cow in yields:
             BadDays += 1
             if BadDays >= DAYSOFWEEK:
                 BadCows.append(cow[0])
-print("The cow that gave the highest milk volume is cow " + BestCow)
+print("The cow that gave the highest milk volume is cow " + BestCow + " who gave " + max(TotalMilk))
 for cow in BadCows:
     print("Cow " + cow + " gave less than " + str(YIELDTHRESHOLD) + " litres for " + str(DAYSOFWEEK) + " or more days")
