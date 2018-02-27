@@ -12,8 +12,9 @@ for i in range(CowPopulation):
     yields.append([])
 for day in range(1, 8):
     print("Day " + str(day))
-    dayOver = False
-    while not dayOver:
+    CowMilkTime = 0
+    while True:
+        CowMilkTime += 1
         cowID = ""
         while len(cowID) > 3 or len(cowID) < 3:
             cowID = input("Enter Cow ID: ")
@@ -30,18 +31,25 @@ for day in range(1, 8):
                     cow.append(litres)
                 else:
                     cow[day] += litres
+                break
             elif len(cow) == 0:
                 cow.append(cowID)
+                if day != 1:
+                    for i in range(day - 1):
+                        cow.append(0.0)
                 cow.append(litres)
                 break
-        if input("Is the day over ? Yes (y) or No (Any other key): ") == "y":
+        if CowMilkTime == 2 * CowPopulation:
+            break
+        if input("Are all the cows done ? Yes (y) or No (Any other key): ") == "y":
             for cow in yields:
-                if len(cow) == day:
+                if len(cow) <= day and len(cow) != 0:
                     cow.append(0.0)
-            dayOver = True
+            break
 
 # TASK 2
 
+print(yields)
 TotalMilk = 0
 for cow in yields:
     for milk in cow:
