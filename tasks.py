@@ -13,7 +13,7 @@ while CowPopulation <= 0 or CowPopulation > 999:
 yields = []
 for i in range(CowPopulation):
     yields.append([])
-for day in range(1, 4):
+for day in range(1, 8):
     NumTimesCowYielded = []
     for i in range(CowPopulation):
         NumTimesCowYielded.append(0)
