@@ -4,22 +4,52 @@ YIELDTHRESHOLD = 12.0
 DAYSOFWEEK = 4
 CowPopulation = 0
 while CowPopulation <= 0 or CowPopulation > 999:
-    CowPopulation = int(input("Enter number of cows in the herd: "))
+    try:
+        CowPopulation = int(input("Enter number of cows in the herd: "))
+    except ValueError:
+        print("Please type a number, not alphabets")
     if CowPopulation <= 0 or CowPopulation > 999:
         print("Cow Population must be between 1 to 999 (inclusive)")
 yields = []
 for i in range(CowPopulation):
     yields.append([])
-for day in range(1, 8):
+for day in range(1, 4):
+    NumTimesCowYielded = []
+    for i in range(CowPopulation):
+        NumTimesCowYielded.append(0)
     print("Day " + str(day))
     CowMilkTime = 0
     while True:
         CowMilkTime += 1
         cowID = ""
-        while len(cowID) > 3 or len(cowID) < 3:
+        stop = False
+        while not stop:
             cowID = input("Enter Cow ID: ")
             if len(cowID) < 3 or len(cowID) > 3:
                 print("Cow ID must be exactly 3 digits long")
+                stop = False
+            else:
+                stop = True
+            CowsRegistered = 0
+            cowIDPresent = False
+            for cow in yields:
+                if cow != [] and cow[0] == str(cow[0]):
+                    CowsRegistered += 1
+                    if cowID in cow:
+                        cowIDPresent = True
+            if CowsRegistered == CowPopulation and not cowIDPresent:
+                print("Cow ID not part of the herd")
+                stop = False
+            else:
+                stop = True
+            for cow in yields:
+                if cowID in cow:
+                    if NumTimesCowYielded[yields.index(cow)] >= 2:
+                        print("You can milk the cow twice at a maximum")
+                        stop = False
+                    else:
+                        stop = True
+                    break
         litres = 0.0
         while litres <= 0.0:
             litres = round(float(input("Enter litres of milk: ")), 1)
@@ -31,6 +61,7 @@ for day in range(1, 8):
                     cow.append(litres)
                 else:
                     cow[day] += litres
+                NumTimesCowYielded[yields.index(cow)] += 1
                 break
             elif len(cow) == 0:
                 cow.append(cowID)
@@ -38,6 +69,7 @@ for day in range(1, 8):
                     for i in range(day - 1):
                         cow.append(0.0)
                 cow.append(litres)
+                NumTimesCowYielded[yields.index(cow)] += 1
                 break
         if CowMilkTime == 2 * CowPopulation:
             break
@@ -76,6 +108,6 @@ for cow in yields:
             BadDays += 1
             if BadDays >= DAYSOFWEEK:
                 BadCows.append(cow[0])
-print("The cow that gave the highest milk volume is cow " + BestCow + " who gave " + max(TotalMilk))
+print("The cow that gave the highest milk volume is cow " + BestCow + " who gave " + str(max(TotalMilk)))
 for cow in BadCows:
     print("Cow " + cow + " gave less than " + str(YIELDTHRESHOLD) + " litres for " + str(DAYSOFWEEK) + " or more days")
