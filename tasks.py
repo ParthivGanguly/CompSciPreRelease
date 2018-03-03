@@ -81,7 +81,6 @@ for day in range(1, 8):
 
 # TASK 2
 
-print(yields)
 TotalMilk = 0
 for cow in yields:
     for milk in cow:
